@@ -3,7 +3,7 @@ import { api } from "../utils/api.ts";
 import { API_ENDPOINTS } from "../../../const/endpoints.ts";
 import {queryConfig} from "../types/queryConfig.ts";
 
-export const getStaffUser = (userId: string, options?: UseQueryOptions) => {
+export const getStaffUserOptions = (userId: string, options?: UseQueryOptions) => {
   return {
     queryKey: ["user_data", userId],
     queryFn: () => api.get(API_ENDPOINTS.DISCORD_STAFF_USERS(userId)),
@@ -13,5 +13,5 @@ export const getStaffUser = (userId: string, options?: UseQueryOptions) => {
 }
 
 export function useGetStaffUser(userId: string, options?: UseQueryOptions) {
-  return useQuery(getStaffUser(userId, options));
+  return useQuery(getStaffUserOptions(userId, options));
 }
