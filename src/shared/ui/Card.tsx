@@ -1,9 +1,9 @@
-import { forwardRef, HTMLAttributes, ImgHTMLAttributes } from "react";
+import { forwardRef, HTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {}
 
-interface CardImage extends ImgHTMLAttributes<HTMLImageElement> {}
+
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ className, children, ...props }, ref) => (
@@ -19,22 +19,8 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
   )
 );
 
-export const Photo = forwardRef<HTMLImageElement, CardImage>(
-  ({ className, children, ...props }, ref) => (
-    <div>
-      <img
-        {...props}
-        ref={ref}
-        className={twMerge(
-          "w-20 h-20 mb-[10px] mt-[10px] object-cover rounded-full ",
-          className
-        )}
-      />
-    </div>
-  )
-);
 
-export const NickName = forwardRef<HTMLDivElement, CardProps>(
+export const CardNickName = forwardRef<HTMLDivElement, CardProps>(
   ({ className, children, ...props }, ref) => (
     <div
       {...props}
@@ -49,7 +35,7 @@ export const NickName = forwardRef<HTMLDivElement, CardProps>(
   )
 );
 
-export const Position = forwardRef<HTMLDivElement, CardProps>(
+export const CardPosition = forwardRef<HTMLDivElement, CardProps>(
   ({ className, children, ...props }, ref) => (
     <div
       {...props}

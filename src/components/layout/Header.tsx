@@ -2,28 +2,25 @@ import { Button } from "../../shared/ui/Button";
 import { Avatar } from "../../shared/ui/Avatar";
 import { Badge } from "../../shared/ui/Badge";
 import { twMerge } from "tailwind-merge";
-import { useQuery } from "@tanstack/react-query";
-import { guild } from "../../api";
+import { useGetGuild } from "../../shared/api/queries/use-get-guild";
+
 
 export default function Header() {
-  const { data, error, isLoading } = useQuery({
-    queryKey: ["guildData", "532331179760812033"], // Уникальный ключ для кэширования
-    queryFn: guild,
-    refetchInterval: 5000,
-    // Функция для получения данных
-  });
+const { data, isLoading, isError } = useGetGuild(); // Вызов функции
 
-  if (isLoading) {
-    return <div>Загрузка...</div>;
+  if (isError) {
+    return <div>Ошибка загрузки данных.</div>; // Показать сообщение об ошибке
   }
-
-  if (error) {
-    return <div>Ошибка при получении данных: {error.message}</div>;
+  if (isLoading) {
+    return <div>Загрузка...</div>; // Показать индикатор загрузки
+  }
+  if (!data) {
+    return <div>Нет данных для отображения.</div>; // Показать сообщение, если данных нет
   }
   return (
     <header className={twMerge("flex justify-between items-center p-2")}>
       <div className={twMerge(" flex gap-2 items-center")}>
-        <Avatar src={`https://cdn.discordapp.com/icons/${data.guildId}/${data.Avatar}`} />
+        <Avatar src={data.iconURL} />
         <h1
           className={twMerge(" text-1 text-white font-bold text-[28px] py-2")}
         >
@@ -34,10 +31,10 @@ export default function Header() {
       <div className={twMerge(" flex items-center gap-2")}>
         <Badge>
           <p className={twMerge("text-[#818189] ml-2 mr-2")}>
-            ● {data.memberCount}
+            ● {data.membercount}
           </p>
           <p className={twMerge("text-[#43a25a]  mr-2 ml-2")}>
-            ● {data.voiceusers}
+            ● {data.uservoice}
           </p>
         </Badge>
         <Button>

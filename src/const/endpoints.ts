@@ -1,4 +1,4 @@
 export const API_ENDPOINTS = {
-    DISCORD_STAFF_USERS: (userId: string) => `/discord/${userId}`,
-    DISCORD_SERVER_DATA: (guildId: string) => `/discord/${guildId}`
+    DISCORD_STAFF_USERS: () => `/api/discord/users/staff`,
+    DISCORD_SERVER_DATA: () => `/api/discord/guild/fear`
 }
