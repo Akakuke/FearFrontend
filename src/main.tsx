@@ -7,9 +7,10 @@ import App from './components/App.tsx';
 // Создайте экземпляр QueryClient
 const queryClient = new QueryClient();
 
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}> {/* Оберните App в QueryClientProvider */}
+    <QueryClientProvider client={queryClient}> 
       <App />
     </QueryClientProvider>
   </StrictMode>,

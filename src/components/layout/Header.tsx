@@ -4,13 +4,9 @@ import { Badge } from "../../shared/ui/Badge";
 import { twMerge } from "tailwind-merge";
 import { useGetGuild } from "../../shared/api/queries/use-get-guild";
 
-
 export default function Header() {
-const { data, isLoading, isError } = useGetGuild(); // Вызов функции
+  const { data, isLoading } = useGetGuild(); // Вызов функции
 
-  if (isError) {
-    return <div>Ошибка загрузки данных.</div>; // Показать сообщение об ошибке
-  }
   if (isLoading) {
     return <div>Загрузка...</div>; // Показать индикатор загрузки
   }
@@ -18,7 +14,8 @@ const { data, isLoading, isError } = useGetGuild(); // Вызов функции
     return <div>Нет данных для отображения.</div>; // Показать сообщение, если данных нет
   }
   return (
-    <header className={twMerge("flex justify-between items-center p-2")}>
+    <header className="bg-[#242424]">
+      <div className={twMerge("flex justify-between items-center p-2")}>
       <div className={twMerge(" flex gap-2 items-center")}>
         <Avatar src={data.iconURL} />
         <h1
@@ -26,8 +23,19 @@ const { data, isLoading, isError } = useGetGuild(); // Вызов функции
         >
           FEAR
         </h1>
+        <div className="flex">
+          <h1 className={twMerge(" text-1 text-white text-[14px] pl-10 mt-1")}>
+            
+            <a href="/">Главная</a>
+          </h1>
+          <h1 className={twMerge(" text-1 text-white text-[14px] pl-5 mt-1")}>
+            <a href="/team">Руководящий состав</a>
+          </h1>
+          <h1 className={twMerge(" text-1 text-white text-[14px] pl-5 mt-1")}>
+           <a href="/404">Что то еще</a>
+          </h1>
+        </div>
       </div>
-
       <div className={twMerge(" flex items-center gap-2")}>
         <Badge>
           <p className={twMerge("text-[#818189] ml-2 mr-2")}>
@@ -43,6 +51,8 @@ const { data, isLoading, isError } = useGetGuild(); // Вызов функции
           </a>
         </Button>
       </div>
+      </div>
     </header>
+    
   );
 }

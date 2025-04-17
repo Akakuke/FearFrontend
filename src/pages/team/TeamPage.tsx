@@ -3,7 +3,7 @@ import { Card, CardNickName, CardPosition } from "../../shared/ui/Card";
 import { useGetStaffUsers } from "../../shared/api/queries/use-get-staff-users";
 import { Avatar } from "../../shared/ui/Avatar";
 
-export default function Main({}) {
+export default function TeamPage({}) {
   const { data, isLoading, isError } = useGetStaffUsers(); // Вызов функции
 
   if (isError) {
@@ -12,7 +12,7 @@ export default function Main({}) {
   if (isLoading) {
     return <div>Загрузка...</div>; // Показать индикатор загрузки
   }
-  if (!data || !data.staff_admin) {
+  if (!data) {
     return <div>Нет данных для отображения.</div>; // Показать сообщение, если данных нет
   }
   return (
